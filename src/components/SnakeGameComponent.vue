@@ -31,7 +31,11 @@ export default {
 
     // generate snake's head
     this.snake = [
-      { x: this.boardSize.width / 2, y: this.boardSize.height / 2 },
+      {
+        // Math.floor is helpful here because if you have an odd width or height you might be generated on half block
+        x: Math.floor(this.boardSize.width / 2),
+        y: Math.floor(this.boardSize.height / 2),
+      },
     ];
 
     // create food position
@@ -87,13 +91,21 @@ export default {
         return;
       }
 
-      // generate the new poition oh the head after the new movement occurs
+      // generate the new position of the head after the new movement occurs
       this.snake.unshift({
         x: this.snake[0].x + this.snakeNewDirection.move.x,
         y: this.snake[0].y + this.snakeNewDirection.move.y,
       });
 
-      this.snake.pop();
+      // check if the new head position and the food position do match
+      if (
+        this.snake[0].x === this.nextFoodPosition.x &&
+        this.snake[0].y === this.nextFoodPosition.y
+      ) {
+        this.generateNewFoodPosition();
+      } else {
+        this.snake.pop();
+      }
 
       this.createGame();
     },
