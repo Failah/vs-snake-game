@@ -1,16 +1,33 @@
 <template>
   <div id="app">
-    <SnakeGameComponent />
+    <GameOptionsComponent @speed="setSpeed" />
+    <SnakeGameComponent :snakeSpeed="speed" />
   </div>
 </template>
 
 <script>
 import SnakeGameComponent from "./components/SnakeGameComponent.vue";
+import GameOptionsComponent from "./components/GameOptionsComponent.vue";
 
 export default {
   name: "App",
   components: {
     SnakeGameComponent,
+    GameOptionsComponent,
+  },
+
+  data() {
+    return {
+      speed: "400",
+    };
+  },
+
+  methods: {
+    setSpeed(selectedSpeed) {
+      this.speed = selectedSpeed;
+      console.log("selected speed is:", selectedSpeed);
+      console.log("speed is:", this.speed);
+    },
   },
 };
 </script>
@@ -23,9 +40,6 @@ export default {
 }
 
 #app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="snake-container">
     <canvas
       ref="snakegame"
       id="snake-game"
@@ -10,10 +10,16 @@
 </template>
 
 <script>
+// let snakeSpeed = this.speed;
+
 import { boardSize, directions } from "../data.js";
 
 export default {
   name: "SnakeGameComponent",
+
+  props: {
+    snakeSpeed: String,
+  },
 
   data() {
     return {
@@ -25,6 +31,20 @@ export default {
     };
   },
 
+  // watches for speed (props) changes and updates the game if any
+  watch: {
+    snakeSpeed: {
+      immediate: true,
+      handler(val, oldVal) {
+        if (val !== oldVal) {
+          this.resetGame();
+          this.moveSpeed();
+          console.log("snakeSpeed:", this.snakeSpeed);
+        }
+      },
+    },
+  },
+
   mounted() {
     // generate 2d context (the ref is specified in canvas attribute ref="snakegame")
     this.context = this.$refs.snakegame.getContext("2d");
@@ -32,7 +52,7 @@ export default {
     this.resetGame();
 
     window.addEventListener("keydown", this.onArrowKeyboardPressed);
-    this.interval = setInterval(this.moveNext, 50);
+    this.interval = setInterval(this.moveNext, this.snakeSpeed);
   },
 
   methods: {
@@ -92,6 +112,11 @@ export default {
     },
 
     // snake movements
+    moveSpeed() {
+      clearInterval(this.interval);
+      this.interval = setInterval(this.moveNext, this.snakeSpeed);
+    },
+
     moveNext() {
       if (this.snakeNewDirection == null) {
         return;
@@ -190,6 +215,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#snake-container {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #snake-game {
   border: 1px solid black;
 }
