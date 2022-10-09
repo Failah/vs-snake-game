@@ -5,6 +5,7 @@ export const boardSize = {
     cellSize: 20,
 };
 
+// DONT TOUCH THESE! :D
 export const directions = [
     {
         name: 'left',

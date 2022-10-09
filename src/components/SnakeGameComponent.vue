@@ -29,26 +29,32 @@ export default {
     // generate 2d context (the ref is specified in canvas attribute ref="snakegame")
     this.context = this.$refs.snakegame.getContext("2d");
 
-    // generate snake's head
-    this.snake = [
-      {
-        // Math.floor is helpful here because if you have an odd width or height you might be generated on half block
-        x: Math.floor(this.boardSize.width / 2),
-        y: Math.floor(this.boardSize.height / 2),
-      },
-    ];
-
-    // create food position
-    this.generateNewFoodPosition();
-
-    // create game enviroinment
-    this.createGame();
+    this.resetGame();
 
     window.addEventListener("keydown", this.onArrowKeyboardPressed);
-    this.interval = setInterval(this.moveNext, 500);
+    this.interval = setInterval(this.moveNext, 50);
   },
 
   methods: {
+    resetGame() {
+      // generate snake's head
+      this.snake = [
+        {
+          // Math.floor is helpful here because if you have an odd width or height you might be generated on half block
+          x: Math.floor(this.boardSize.width / 2),
+          y: Math.floor(this.boardSize.height / 2),
+        },
+      ];
+
+      this.snakeNewDirection = null;
+
+      // create food position
+      this.generateNewFoodPosition();
+
+      // create game enviroinment
+      this.createGame();
+    },
+
     createGame() {
       // clear entire enviroinment
       this.context.clearRect(
@@ -107,8 +113,36 @@ export default {
         this.snake.pop();
       }
 
+      // ---------------------------------------------------------------------------------------- COLLISIONS
+      // check if the new head position collides with the snake body or an area border
+      // SNAKE BODY COLLISION
+      for (let i = 1; i < this.snake.length; i++) {
+        if (
+          this.snake[0].x === this.snake[i].x &&
+          this.snake[0].y === this.snake[i].y
+        ) {
+          // this.snakeNewDirection = null;
+          this.resetGame();
+          window.alert("You lost! The snake crashed on its body :(");
+          return;
+        }
+      }
+      // AREA BORDERS COLLISION
+      if (
+        this.snake[0].x < 0 ||
+        this.snake[0].x >= this.boardSize.width ||
+        this.snake[0].y < 0 ||
+        this.snake[0].y >= this.boardSize.height
+      ) {
+        // this.snakeNewDirection = null;
+        this.resetGame();
+        window.alert("You lost! The snake crashed on a wall :(");
+        return;
+      }
+
       this.createGame();
     },
+    // ---------------------------------------------------------------------------------------- /COLLISIONS
 
     onArrowKeyboardPressed(event) {
       // find the direction
