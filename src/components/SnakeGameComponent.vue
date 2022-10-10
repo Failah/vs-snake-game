@@ -10,8 +10,7 @@
       id="snake-game"
       :width="boardSize.width * boardSize.cellSize"
       :height="boardSize.height * boardSize.cellSize"
-    >
-    </canvas>
+    />
 
     <!-- this is the pause screen -->
     <div v-if="!pauseIndex" id="pause-screen">GAME PAUSED</div>
@@ -35,8 +34,10 @@ export default {
       snake: [{ x: 0, y: 0 }],
       snakeNewDirection: null,
       nextFoodPosition: { x: 0, y: 0 },
+      nextGhostPosition: { x: 0, y: 0 },
       pauseIndex: true,
       score: 0,
+      ghostCounter: 0,
     };
   },
 
@@ -46,15 +47,22 @@ export default {
     snakeSpeed: {
       immediate: true,
       handler(val, oldVal) {
-        if (val !== oldVal) {
+        if (val !== oldVal && this.snakeSpeed) {
           this.pauseIndex = true; // this is needed otherwise different intervals will alternate on pause trigger if you start a new game while beeing in pause mode (generating not pause but alternate speed movement)
           this.resetGame();
-          this.moveSpeed();
+          clearInterval(this.ghostInterval);
+          (this.ghostCounter = 0), this.moveSpeed();
           console.log("snakeSpeed:", this.snakeSpeed);
         }
       },
     },
   },
+
+  // computed: {
+  //   getSnakeSpeed() {
+  //     let speedValue = this.snakeSpeed
+  //   },
+  // },
 
   mounted() {
     // generate 2d context (the ref is specified in canvas attribute ref="snakegame")
@@ -87,6 +95,7 @@ export default {
 
       // create food position
       this.generateNewFoodPosition();
+      this.generateNewGhostPosition();
 
       this.score = 0;
       this.$emit("currentScore", this.score);
@@ -111,10 +120,10 @@ export default {
           body.x * this.boardSize.cellSize,
           body.y * this.boardSize.cellSize,
           this.boardSize.cellSize,
-          this.boardSize.cellSize,
+          this.boardSize.cellSize
           // (this.context.lineCap = "round"), // working on get snake's body rounded
-          // (this.context.lineWidth = 2),
-          this.context.stroke()
+          // (this.context.lineWidth = 5),
+          // this.context.stroke()
         );
         this.context.fillStyle = "black";
         this.context.fill();
@@ -129,7 +138,20 @@ export default {
         this.boardSize.cellSize,
         this.boardSize.cellSize
       );
-      this.context.fillStyle = "red";
+      this.context.fillStyle = "green";
+      this.context.fill();
+      this.context.closePath();
+
+      // creates ghost appearance
+      this.context.beginPath();
+      this.context.rect(
+        this.nextGhostPosition.x * this.boardSize.cellSize,
+        this.nextGhostPosition.y * this.boardSize.cellSize,
+        this.boardSize.cellSize,
+        this.boardSize.cellSize
+      );
+      // this.context.fillStyle = "#6E260E";
+      this.context.fillStyle = "purple";
       this.context.fill();
       this.context.closePath();
     },
@@ -138,9 +160,13 @@ export default {
       console.log("Pause game triggered");
       if (this.pauseIndex === true) {
         clearInterval(this.interval);
+        clearInterval(this.ghostInterval);
         this.pauseIndex = !this.pauseIndex;
       } else {
         this.interval = setInterval(this.moveNext, this.snakeSpeed);
+        if (this.ghostCounter !== 0) {
+          this.ghostInterval = setInterval(this.generateNewGhostPosition, 2000);
+        }
         this.pauseIndex = !this.pauseIndex;
       }
     },
@@ -183,7 +209,9 @@ export default {
         ) {
           // this.snakeNewDirection = null;
           this.resetGame();
-          window.alert("You lost! The snake crashed on its body :(");
+          clearInterval(this.ghostInterval);
+          (this.ghostCounter = 0),
+            window.alert("You lost! The snake crashed on its body :(");
           return;
         }
       }
@@ -196,15 +224,34 @@ export default {
       ) {
         // this.snakeNewDirection = null;
         this.resetGame();
-        window.alert("You lost! The snake crashed on a wall :(");
+        clearInterval(this.ghostInterval);
+        (this.ghostCounter = 0),
+          window.alert("You lost! The snake crashed on a wall :(");
         return;
       }
-
+      // GHOST COLLISION
+      if (
+        this.snake[0].x === this.nextGhostPosition.x &&
+        this.snake[0].y === this.nextGhostPosition.y
+      ) {
+        // this.snakeNewDirection = null;
+        this.resetGame();
+        clearInterval(this.ghostInterval);
+        (this.ghostCounter = 0),
+          window.alert("You lost! You have been caught by a ghost :(");
+        return;
+      }
       this.createGame();
     },
     // ---------------------------------------------------------------------------------------- /COLLISIONS
 
     onArrowKeyboardPressed(event) {
+      // starts generating ghosts only when the player starts playing
+      if (this.ghostCounter === 0) {
+        this.ghostInterval = setInterval(this.generateNewGhostPosition, 2000);
+        this.ghostCounter++;
+      }
+
       // find the direction
       let direction = this.directions.find(
         (direct) => direct.keyCode == event.keyCode
@@ -223,7 +270,7 @@ export default {
       }
     },
 
-    // food scripting
+    // game elements generation and scripting
     generateNewFoodPosition() {
       let positionFound = false;
       while (!positionFound) {
@@ -240,6 +287,27 @@ export default {
         );
         if (!snakeBody) {
           this.nextFoodPosition = foodPosition;
+          positionFound = true;
+        }
+      }
+    },
+
+    generateNewGhostPosition() {
+      let positionFound = false;
+      while (!positionFound) {
+        // generate random ghost position
+        const ghostPosition = {
+          x: Math.floor(Math.random() * this.boardSize.width),
+          y: Math.floor(Math.random() * this.boardSize.height),
+        };
+
+        // check if this new food position is not part of the snake
+        const snakeBody = this.snake.find(
+          (snakePos) =>
+            snakePos.x === ghostPosition.x && snakePos.y === ghostPosition.y
+        );
+        if (!snakeBody) {
+          this.nextGhostPosition = ghostPosition;
           positionFound = true;
         }
       }
@@ -306,6 +374,7 @@ export default {
 
     div {
       padding-top: 2px;
+      width: 50px;
     }
   }
 

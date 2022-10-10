@@ -66,6 +66,7 @@ export default {
 
     div {
       padding-top: 2px;
+      width: 50px;
     }
   }
 }
