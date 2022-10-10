@@ -3,7 +3,7 @@
     <div id="speed-select">
       <h3>Select Snake's speed:</h3>
       <select
-        @change="$emit('speed', speedValue)"
+        @change="$emit('speed', speedValue), removeBlur()"
         v-model="speedValue"
         name="speed"
         id="speed"
@@ -35,6 +35,13 @@ export default {
 
   props: {
     score: Number,
+  },
+
+  methods: {
+    removeBlur() {
+      console.log("remove blur");
+      document.activeElement.blur();
+    },
   },
 };
 </script>
