@@ -10,8 +10,6 @@
 </template>
 
 <script>
-// let snakeSpeed = this.speed;
-
 import { boardSize, directions } from "../data.js";
 
 export default {
@@ -24,19 +22,22 @@ export default {
   data() {
     return {
       boardSize: boardSize,
+      directions: directions,
       snake: [{ x: 0, y: 0 }],
       snakeNewDirection: null,
-      directions: directions,
       nextFoodPosition: { x: 0, y: 0 },
+      pauseIndex: true,
     };
   },
 
   // watches for speed (props) changes and updates the game if any
+  // in this case said "change" occurs when user changes snake's speed via the html select element
   watch: {
     snakeSpeed: {
       immediate: true,
       handler(val, oldVal) {
         if (val !== oldVal) {
+          this.pauseIndex = true;
           this.resetGame();
           this.moveSpeed();
           console.log("snakeSpeed:", this.snakeSpeed);
@@ -50,6 +51,12 @@ export default {
     this.context = this.$refs.snakegame.getContext("2d");
 
     this.resetGame();
+
+    window.addEventListener("keyup", (event) => {
+      if (event.keyCode === 32) {
+        this.pauseGame();
+      }
+    });
 
     window.addEventListener("keydown", this.onArrowKeyboardPressed);
     this.interval = setInterval(this.moveNext, this.snakeSpeed);
@@ -71,12 +78,12 @@ export default {
       // create food position
       this.generateNewFoodPosition();
 
-      // create game enviroinment
+      // create game enviroinment with elements
       this.createGame();
     },
 
     createGame() {
-      // clear entire enviroinment
+      // clear entire enviroinment pixels
       this.context.clearRect(
         0,
         0,
@@ -98,7 +105,7 @@ export default {
       });
       this.context.closePath();
 
-      // creates the food in the game area
+      // creates food appearance
       this.context.beginPath();
       this.context.rect(
         this.nextFoodPosition.x * this.boardSize.cellSize,
@@ -109,6 +116,17 @@ export default {
       this.context.fillStyle = "red";
       this.context.fill();
       this.context.closePath();
+    },
+
+    pauseGame() {
+      console.log("Pause game triggered");
+      if (this.pauseIndex === true) {
+        clearInterval(this.interval);
+        this.pauseIndex = !this.pauseIndex;
+      } else {
+        this.interval = setInterval(this.moveNext, this.snakeSpeed);
+        this.pauseIndex = !this.pauseIndex;
+      }
     },
 
     // snake movements
