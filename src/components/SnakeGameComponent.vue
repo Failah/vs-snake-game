@@ -1,11 +1,13 @@
 <template>
   <div id="snake-container">
+    <div v-if="!pauseIndex" id="pause-screen">GAME PAUSED</div>
     <canvas
       ref="snakegame"
       id="snake-game"
       :width="boardSize.width * boardSize.cellSize"
       :height="boardSize.height * boardSize.cellSize"
-    />
+    >
+    </canvas>
   </div>
 </template>
 
@@ -234,14 +236,30 @@ export default {
 
 <style lang="scss" scoped>
 #snake-container {
+  position: relative;
   margin: 0 auto;
   background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-}
 
-#snake-game {
-  border: 4px solid black;
+  #snake-game {
+    border: 4px solid black;
+  }
+
+  #pause-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 4px solid black;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: black;
+    font-size: 4rem;
+  }
 }
 </style>

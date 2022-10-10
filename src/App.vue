@@ -42,6 +42,11 @@ export default {
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "Game";
+  src: local("Game"), url(./fonts/PressStart2P-Regular.ttf) format("truetype");
+}
+
 #app {
   height: 100vh;
   display: flex;
@@ -49,5 +54,6 @@ export default {
   align-items: center;
   justify-content: space-between;
   background-color: darkgreen;
+  font-family: "Game", Helvetica, Arial;
 }
 </style>

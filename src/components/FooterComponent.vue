@@ -12,6 +12,7 @@ export default {
 
 <style lang="scss" scoped>
 #footer-container {
+  padding: 20px;
   background-color: gray;
   height: 120px;
   width: 100%;
