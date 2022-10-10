@@ -1,6 +1,15 @@
 <template>
   <div id="footer-container">
     <h3>Press SPACE to trigger Pause Game</h3>
+    <div id="credits">
+      <h5>Developed by Valerio Schiarizza</h5>
+      <h5>
+        Aka Failah:
+        <a target="_blank" href="https://github.com/Failah/vs-snake-game"
+          >GitHub</a
+        >
+      </h5>
+    </div>
   </div>
 </template>
 
@@ -17,5 +26,21 @@ export default {
   height: 120px;
   width: 100%;
   text-align: center;
+  position: relative;
+
+  #credits {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+
+    h5 {
+      padding-bottom: 5px;
+
+      a {
+        text-decoration: none;
+        color: red;
+      }
+    }
+  }
 }
 </style>

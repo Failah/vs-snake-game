@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <FirstScreenGame />
     <GameOptionsComponent @speed="setSpeed" />
     <SnakeGameComponent :snakeSpeed="speed" />
     <FooterComponent />
@@ -10,6 +11,7 @@
 import SnakeGameComponent from "./components/SnakeGameComponent.vue";
 import GameOptionsComponent from "./components/GameOptionsComponent.vue";
 import FooterComponent from "./components/FooterComponent.vue";
+import FirstScreenGame from "./components/FirstScreenGame.vue";
 
 export default {
   name: "App",
@@ -17,6 +19,7 @@ export default {
     SnakeGameComponent,
     GameOptionsComponent,
     FooterComponent,
+    FirstScreenGame,
   },
 
   data() {
@@ -55,5 +58,6 @@ export default {
   justify-content: space-between;
   background-color: darkgreen;
   font-family: "Game", Helvetica, Arial;
+  position: relative;
 }
 </style>

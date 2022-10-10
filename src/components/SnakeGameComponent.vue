@@ -93,14 +93,17 @@ export default {
         this.boardSize.height * this.boardSize.cellSize
       );
 
-      // create the snake
+      // create the snake appearance
       this.context.beginPath();
       this.snake.forEach((body) => {
         this.context.rect(
           body.x * this.boardSize.cellSize,
           body.y * this.boardSize.cellSize,
           this.boardSize.cellSize,
-          this.boardSize.cellSize
+          this.boardSize.cellSize,
+          // (this.context.lineCap = "round"), // working on get snake's body rounded
+          // (this.context.lineWidth = 2),
+          this.context.stroke()
         );
         this.context.fillStyle = "black";
         this.context.fill();
