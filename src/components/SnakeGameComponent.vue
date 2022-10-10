@@ -29,6 +29,7 @@ export default {
       snakeNewDirection: null,
       nextFoodPosition: { x: 0, y: 0 },
       pauseIndex: true,
+      score: 0,
     };
   },
 
@@ -79,6 +80,9 @@ export default {
 
       // create food position
       this.generateNewFoodPosition();
+
+      this.score = 0;
+      this.$emit("currentScore", this.score);
 
       // create game enviroinment with elements
       this.createGame();
@@ -156,6 +160,7 @@ export default {
         this.snake[0].x === this.nextFoodPosition.x &&
         this.snake[0].y === this.nextFoodPosition.y
       ) {
+        this.increaseScore();
         this.generateNewFoodPosition();
       } else {
         this.snake.pop();
@@ -232,6 +237,13 @@ export default {
         }
       }
       this.createGame();
+    },
+
+    // score scripting
+    increaseScore() {
+      this.score++;
+      this.$emit("currentScore", this.score);
+      console.log("Current Score:", this.score);
     },
   },
 };

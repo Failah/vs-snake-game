@@ -5,7 +5,10 @@
       <h5>Developed by Valerio Schiarizza</h5>
       <h5>
         Aka Failah:
-        <a target="_blank" href="https://github.com/Failah/vs-snake-game"
+        <a
+          class="developer"
+          target="_blank"
+          href="https://github.com/Failah/vs-snake-game"
           >GitHub</a
         >
       </h5>
@@ -39,6 +42,10 @@ export default {
       a {
         text-decoration: none;
         color: red;
+      }
+
+      .developer:hover {
+        text-decoration: underline;
       }
     }
   }

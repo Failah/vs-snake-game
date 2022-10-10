@@ -41,6 +41,7 @@ export default {
   row-gap: 30px;
   justify-content: center;
   align-items: center;
+  text-align: center;
   background-color: grey;
   color: darkgreen;
 }

@@ -16,6 +16,10 @@
         <option value="20">Impossible</option>
       </select>
     </div>
+    <div id="score-counter">
+      <h3>Score:</h3>
+      <div>{{ score }}</div>
+    </div>
   </div>
 </template>
 
@@ -28,17 +32,28 @@ export default {
       speedValue: "400",
     };
   },
+
+  props: {
+    score: Number,
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 #game-options-container {
-  padding: 20px;
   background-color: bisque;
   height: 120px;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 
   #speed-select {
+    display: flex;
+    column-gap: 10px;
+  }
+
+  #score-counter {
     display: flex;
     column-gap: 10px;
   }

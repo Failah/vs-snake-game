@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <FirstScreenGame />
-    <GameOptionsComponent @speed="setSpeed" />
-    <SnakeGameComponent :snakeSpeed="speed" />
+    <GameOptionsComponent @speed="setSpeed" :score="score" />
+    <SnakeGameComponent :snakeSpeed="speed" @currentScore="setScore" />
     <FooterComponent />
   </div>
 </template>
@@ -25,6 +25,7 @@ export default {
   data() {
     return {
       speed: "400",
+      score: 0,
     };
   },
 
@@ -33,6 +34,10 @@ export default {
       this.speed = selectedSpeed;
       console.log("selected speed is:", selectedSpeed);
       console.log("speed is:", this.speed);
+    },
+
+    setScore(score) {
+      this.score = score;
     },
   },
 };
