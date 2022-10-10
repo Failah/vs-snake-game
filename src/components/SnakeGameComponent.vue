@@ -37,7 +37,7 @@ export default {
       immediate: true,
       handler(val, oldVal) {
         if (val !== oldVal) {
-          this.pauseIndex = true;
+          this.pauseIndex = true; // this is needed otherwise different intervals will alternate on pause trigger if you start a new game while beeing in pause mode (generating not pause but alternate speed movement)
           this.resetGame();
           this.moveSpeed();
           console.log("snakeSpeed:", this.snakeSpeed);
@@ -235,12 +235,13 @@ export default {
 <style lang="scss" scoped>
 #snake-container {
   margin: 0 auto;
+  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 #snake-game {
-  border: 1px solid black;
+  border: 4px solid black;
 }
 </style>

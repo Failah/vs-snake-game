@@ -2,18 +2,21 @@
   <div id="app">
     <GameOptionsComponent @speed="setSpeed" />
     <SnakeGameComponent :snakeSpeed="speed" />
+    <FooterComponent />
   </div>
 </template>
 
 <script>
 import SnakeGameComponent from "./components/SnakeGameComponent.vue";
 import GameOptionsComponent from "./components/GameOptionsComponent.vue";
+import FooterComponent from "./components/FooterComponent.vue";
 
 export default {
   name: "App",
   components: {
     SnakeGameComponent,
     GameOptionsComponent,
+    FooterComponent,
   },
 
   data() {
@@ -41,5 +44,10 @@ export default {
 
 #app {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: darkgreen;
 }
 </style>
