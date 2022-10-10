@@ -63,6 +63,10 @@ export default {
   #score-counter {
     display: flex;
     column-gap: 10px;
+
+    div {
+      padding-top: 2px;
+    }
   }
 }
 </style>

@@ -1,6 +1,10 @@
 <template>
   <div id="snake-container">
-    <div v-if="!pauseIndex" id="pause-screen">GAME PAUSED</div>
+    <div id="score-counter">
+      <h3>Score:</h3>
+      <div>{{ score }}</div>
+    </div>
+
     <canvas
       ref="snakegame"
       id="snake-game"
@@ -8,6 +12,9 @@
       :height="boardSize.height * boardSize.cellSize"
     >
     </canvas>
+
+    <!-- this is the pause screen -->
+    <div v-if="!pauseIndex" id="pause-screen">GAME PAUSED</div>
   </div>
 </template>
 
@@ -240,8 +247,40 @@ export default {
     },
 
     // score scripting
+    getMultiplier(value) {
+      let multiplier = 0;
+      switch (value) {
+        case "400": {
+          multiplier = 1;
+          break;
+        }
+        case "300": {
+          multiplier = 2;
+          break;
+        }
+        case "200": {
+          multiplier = 3;
+          break;
+        }
+        case "100": {
+          multiplier = 4;
+          break;
+        }
+        case "50": {
+          multiplier = 5;
+          break;
+        }
+        case "20": {
+          multiplier = 6;
+          break;
+        }
+      }
+      return multiplier;
+    },
+
     increaseScore() {
-      this.score++;
+      let inc = this.getMultiplier(this.snakeSpeed);
+      this.score += inc;
       this.$emit("currentScore", this.score);
       console.log("Current Score:", this.score);
     },
@@ -257,6 +296,18 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  #score-counter {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    display: flex;
+    column-gap: 10px;
+
+    div {
+      padding-top: 2px;
+    }
+  }
 
   #snake-game {
     border: 4px solid black;
