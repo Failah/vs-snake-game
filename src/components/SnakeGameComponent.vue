@@ -58,12 +58,6 @@ export default {
     },
   },
 
-  // computed: {
-  //   getSnakeSpeed() {
-  //     let speedValue = this.snakeSpeed
-  //   },
-  // },
-
   mounted() {
     // generate 2d context (the ref is specified in canvas attribute ref="snakegame")
     this.context = this.$refs.snakegame.getContext("2d");
