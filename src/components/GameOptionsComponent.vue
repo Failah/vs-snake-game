@@ -60,15 +60,19 @@ export default {
 
   #speed-select {
     display: flex;
+    align-items: center;
     column-gap: 10px;
   }
 
   #speed {
     background-color: black;
     color: #ff005b;
+    border: #ff005b 1px solid;
+    padding: 5px;
 
     option {
       background-color: black;
+      padding: 5px 0px;
     }
   }
 
