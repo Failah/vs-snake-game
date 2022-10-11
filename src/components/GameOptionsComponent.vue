@@ -48,12 +48,14 @@ export default {
 
 <style lang="scss" scoped>
 #game-options-container {
-  background-color: bisque;
+  background-color: black;
+  color: #ff005b;
   height: 120px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  border: #fffd01 5px solid;
 
   #speed-select {
     display: flex;

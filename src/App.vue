@@ -61,7 +61,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: darkgreen;
+  background-color: black;
   font-family: "Game", Helvetica, Arial;
   position: relative;
 }

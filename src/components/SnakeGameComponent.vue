@@ -119,7 +119,7 @@ export default {
           // (this.context.lineWidth = 5),
           // this.context.stroke()
         );
-        this.context.fillStyle = "black";
+        this.context.fillStyle = "#01c4ff";
         this.context.fill();
       });
       this.context.closePath();
@@ -132,7 +132,7 @@ export default {
         this.boardSize.cellSize,
         this.boardSize.cellSize
       );
-      this.context.fillStyle = "green";
+      this.context.fillStyle = "#7aff01";
       this.context.fill();
       this.context.closePath();
 
@@ -158,7 +158,7 @@ export default {
         this.pauseIndex = !this.pauseIndex;
       } else {
         this.interval = setInterval(this.moveNext, this.snakeSpeed);
-        if (this.ghostCounter !== 0) {
+        if (this.ghostCounter > 0) {
           this.ghostInterval = setInterval(this.generateNewGhostPosition, 2000);
         }
         this.pauseIndex = !this.pauseIndex;
@@ -358,37 +358,67 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: black;
+  border: 5px solid #01c4ff;
+  border-top: none;
+  border-bottom: none;
+  height: 100%;
+  width: 100%;
 
   #score-counter {
     position: absolute;
-    top: -40px;
-    right: 0;
+    top: 125px;
+    left: 24%;
     display: flex;
     column-gap: 10px;
+
+    h3 {
+      color: #01c4ff;
+    }
 
     div {
       padding-top: 2px;
       width: 50px;
+      color: #01c4ff;
     }
   }
 
   #snake-game {
-    border: 4px solid black;
+    border: 4px solid #01c4ff;
   }
 
   #pause-screen {
     position: absolute;
     top: 0;
     left: 0;
-    border: 4px solid black;
+    border: none;
     height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: black;
-    font-size: 4rem;
+    color: #fa00ff;
+    font-size: 4.5rem;
+    animation: MoveUpDown 2s linear infinite;
+  }
+
+  @keyframes MoveUpDown {
+    0% {
+      top: -50px;
+    }
+    50% {
+      top: 50px;
+    }
+    100% {
+      top: -50px;
+    }
+  }
+}
+
+// media queries
+@media screen and (max-width: 1200px) {
+  #score-counter {
+    left: 7% !important;
   }
 }
 </style>

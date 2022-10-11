@@ -1,6 +1,7 @@
 <template>
   <div id="footer-container">
     <h3>Press SPACE to trigger Pause Game</h3>
+    <h3>Don't get caught by the <span>Ghost</span>!</h3>
     <div id="credits">
       <h5>Developed by Valerio Schiarizza</h5>
       <h5>
@@ -25,11 +26,21 @@ export default {
 <style lang="scss" scoped>
 #footer-container {
   padding: 20px;
-  background-color: gray;
+  background-color: black;
+  border: 5px solid #01ffb2;
+  color: #01ffb2;
   height: 120px;
   width: 100%;
   text-align: center;
   position: relative;
+
+  h3 {
+    margin-bottom: 10px;
+
+    span {
+      color: purple;
+    }
+  }
 
   #credits {
     position: absolute;
