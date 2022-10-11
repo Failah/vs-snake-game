@@ -64,5 +64,10 @@ export default {
   background-color: black;
   font-family: "Game", Helvetica, Arial;
   position: relative;
+  cursor: url(https://cdn.custom-cursor.com/db/cursor/32/Orange_Arrow_NeonCursor.png) !important;
+
+  &:hover {
+    cursor: url(https://cdn.custom-cursor.com/db/cursor/32/Orange_Arrow_NeonCursor.png) !important;
+  }
 }
 </style>

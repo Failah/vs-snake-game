@@ -3,6 +3,7 @@
     <div id="speed-select">
       <h3>Select Snake's speed:</h3>
       <select
+        class="decorated"
         @change="$emit('speed', speedValue), removeBlur()"
         v-model="speedValue"
         name="speed"
@@ -60,6 +61,15 @@ export default {
   #speed-select {
     display: flex;
     column-gap: 10px;
+  }
+
+  #speed {
+    background-color: black;
+    color: #ff005b;
+
+    option {
+      background-color: black;
+    }
   }
 
   #score-counter {

@@ -358,7 +358,9 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-image: url(../assets/neoncity1.gif);
+  background-size: cover;
+  background-position-y: 40%;
   border: 5px solid #01c4ff;
   border-top: none;
   border-bottom: none;
@@ -385,6 +387,7 @@ export default {
 
   #snake-game {
     border: 4px solid #01c4ff;
+    background-color: black;
   }
 
   #pause-screen {

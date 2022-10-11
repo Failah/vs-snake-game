@@ -1,6 +1,6 @@
 <template>
   <div v-if="toggleStartScreen" id="start-screen">
-    <div>SNAKE!</div>
+    <div>NEON SNAKE</div>
     <div>Developed by Failah</div>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
   },
 
   mounted() {
-    this.timer = setTimeout(this.toggleScreen, 2000);
+    this.timer = setTimeout(this.toggleScreen, 1700);
   },
 
   methods: {
@@ -38,11 +38,24 @@ export default {
   z-index: 100;
   display: flex;
   flex-direction: column;
-  row-gap: 30px;
+  row-gap: 120px;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: grey;
-  color: darkgreen;
+  background-color: black;
+  color: #fa00ff;
+  animation: disappear 1.5s linear forwards;
+}
+
+@keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 </style>
