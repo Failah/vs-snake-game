@@ -13,6 +13,10 @@
       <span></span>
       START GAME
     </button>
+    <div>
+      <p>Instagram: valerio_skya</p>
+      <p>GitHub: Failah</p>
+    </div>
   </div>
 </template>
 
@@ -64,6 +68,12 @@ export default {
   text-align: center;
   background-color: black;
   color: #fa00ff;
+
+  p {
+    color: #fffd01;
+    padding-bottom: 20px;
+    font-size: 2rem;
+  }
 }
 
 .disappear-animation {
@@ -171,7 +181,6 @@ button span:nth-child(3) {
   0% {
     right: -100%;
   }
-  50%,
   100% {
     right: 100%;
   }

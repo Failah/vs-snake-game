@@ -72,7 +72,6 @@ export default {
 
     option {
       background-color: black;
-      padding: 5px 0px;
     }
   }
 
