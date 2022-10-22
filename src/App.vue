@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <FirstScreenGame />
-    <GameOptionsComponent @speed="setSpeed" :score="totalPoints" />
+    <HeaderComponent @speed="setSpeed" :score="totalPoints" />
     <SnakeGameComponent :snakeSpeed="speed" @currentScore="setScore" />
     <FooterComponent />
   </div>
@@ -9,7 +9,7 @@
 
 <script>
 import SnakeGameComponent from "./components/SnakeGameComponent.vue";
-import GameOptionsComponent from "./components/GameOptionsComponent.vue";
+import HeaderComponent from "./components/HeaderComponent.vue";
 import FooterComponent from "./components/FooterComponent.vue";
 import FirstScreenGame from "./components/FirstScreenGame.vue";
 
@@ -17,7 +17,7 @@ export default {
   name: "App",
   components: {
     SnakeGameComponent,
-    GameOptionsComponent,
+    HeaderComponent,
     FooterComponent,
     FirstScreenGame,
   },

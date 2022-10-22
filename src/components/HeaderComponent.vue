@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: "GameOptionsComponent",
+  name: "HeaderComponent",
 
   data() {
     return {
