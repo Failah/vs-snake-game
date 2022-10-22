@@ -176,6 +176,12 @@ export default {
         return;
       }
 
+      // starts generating ghosts only when the player starts playing
+      if (this.ghostCounter === 0) {
+        this.ghostInterval = setInterval(this.generateNewGhostPosition, 2000);
+        this.ghostCounter++;
+      }
+
       // generate the new position of the head after the new movement occurs
       this.snake.unshift({
         x: this.snake[0].x + this.snakeNewDirection.move.x,
@@ -243,12 +249,6 @@ export default {
     // ---------------------------------------------------------------------------------------- /COLLISIONS
 
     onArrowKeyboardPressed(event) {
-      // starts generating ghosts only when the player starts playing
-      if (this.ghostCounter === 0) {
-        this.ghostInterval = setInterval(this.generateNewGhostPosition, 2000);
-        this.ghostCounter++;
-      }
-
       // find the direction
       let direction = this.directions.find(
         (direct) => direct.keyCode == event.keyCode
