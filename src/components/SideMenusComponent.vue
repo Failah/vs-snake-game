@@ -1,5 +1,5 @@
 <template>
-  <div id="lateral-menus-container">
+  <div id="side-menus-container">
     <div class="menu left-menu-active">
       MENU SX
       <div class="toggle-button left-button">OPTIONS</div>
@@ -13,12 +13,12 @@
 
 <script>
 export default {
-  name: "LateralMenuComponent",
+  name: "SideMenuComponent",
 };
 </script>
 
 <style lang="scss" scoped>
-#lateral-menus-container {
+#side-menus-container {
   position: absolute;
   display: flex;
   justify-content: space-between;
