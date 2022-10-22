@@ -18,7 +18,7 @@
       </select>
     </div>
     <div id="score-counter">
-      <h3>Score:</h3>
+      <h3>Total Points:</h3>
       <div>{{ score }}</div>
     </div>
   </div>

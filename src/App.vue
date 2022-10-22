@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <FirstScreenGame />
-    <GameOptionsComponent @speed="setSpeed" :score="score" />
+    <GameOptionsComponent @speed="setSpeed" :score="totalPoints" />
     <SnakeGameComponent :snakeSpeed="speed" @currentScore="setScore" />
     <FooterComponent />
   </div>
@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       speed: "400",
-      score: 0,
+      totalPoints: 0,
     };
   },
 
@@ -37,7 +37,7 @@ export default {
     },
 
     setScore(score) {
-      this.score = score;
+      this.totalPoints += score;
     },
   },
 };
