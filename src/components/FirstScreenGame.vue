@@ -60,7 +60,7 @@ export default {
   height: 100%;
   width: 100%;
   z-index: 200;
-  display: none;
+  display: flex;
   flex-direction: column;
   row-gap: 120px;
   justify-content: center;
