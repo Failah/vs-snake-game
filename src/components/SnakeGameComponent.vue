@@ -1,16 +1,17 @@
 <template>
   <div id="snake-container">
-    <div id="score-counter">
-      <h3>Score:</h3>
-      <div>{{ score }}</div>
+    <div id="game-container">
+      <div id="score-counter">
+        <h3>Score:</h3>
+        <div>{{ score }}</div>
+      </div>
+      <canvas
+        ref="snakegame"
+        id="snake-game"
+        :width="boardSize.width * boardSize.cellSize"
+        :height="boardSize.height * boardSize.cellSize"
+      />
     </div>
-
-    <canvas
-      ref="snakegame"
-      id="snake-game"
-      :width="boardSize.width * boardSize.cellSize"
-      :height="boardSize.height * boardSize.cellSize"
-    />
 
     <!-- this is the pause screen -->
     <div v-if="!pauseIndex" id="pause-screen">GAME PAUSED</div>
@@ -92,7 +93,6 @@ export default {
       this.generateNewGhostPosition();
 
       this.score = 0;
-      this.$emit("currentScore", this.score);
 
       // create game enviroinment with elements
       this.createGame();
@@ -202,6 +202,7 @@ export default {
           this.snake[0].y === this.snake[i].y
         ) {
           // this.snakeNewDirection = null;
+          this.$emit("currentScore", this.score);
           this.resetGame();
           clearInterval(this.ghostInterval);
           (this.ghostCounter = 0),
@@ -217,6 +218,7 @@ export default {
         this.snake[0].y >= this.boardSize.height
       ) {
         // this.snakeNewDirection = null;
+        this.$emit("currentScore", this.score);
         this.resetGame();
         clearInterval(this.ghostInterval);
         (this.ghostCounter = 0),
@@ -229,6 +231,7 @@ export default {
         this.snake[0].y === this.nextGhostPosition.y
       ) {
         // this.snakeNewDirection = null;
+        this.$emit("currentScore", this.score);
         this.resetGame();
         clearInterval(this.ghostInterval);
         (this.ghostCounter = 0),
@@ -343,7 +346,6 @@ export default {
     increaseScore() {
       let inc = this.getMultiplier(this.snakeSpeed);
       this.score += inc;
-      this.$emit("currentScore", this.score);
       console.log("Current Score:", this.score);
     },
   },
@@ -367,21 +369,29 @@ export default {
   height: 100%;
   width: 100%;
 
-  #score-counter {
-    position: absolute;
-    top: 125px;
-    left: 24%;
-    display: flex;
-    column-gap: 10px;
+  #game-container {
+    position: relative;
+    #score-counter {
+      position: absolute;
+      top: -50px;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      column-gap: 10px;
+      background-color: black;
+      padding: 10px;
+      border: 5px solid #fa00ff;
 
-    h3 {
-      color: #01c4ff;
-    }
+      h3 {
+        color: #01c4ff;
+      }
 
-    div {
-      padding-top: 2px;
-      width: 50px;
-      color: #01c4ff;
+      div {
+        padding-top: 2px;
+        // width: 50px;
+        color: #01c4ff;
+      }
     }
   }
 
@@ -415,13 +425,6 @@ export default {
     100% {
       top: -50px;
     }
-  }
-}
-
-// media queries
-@media screen and (max-width: 1200px) {
-  #score-counter {
-    left: 7% !important;
   }
 }
 </style>
