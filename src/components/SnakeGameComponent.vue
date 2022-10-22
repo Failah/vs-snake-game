@@ -1,5 +1,6 @@
 <template>
   <div id="snake-container">
+    <LateralMenuComponent />
     <div id="game-container">
       <div id="score-counter">
         <h3>Score:</h3>
@@ -20,9 +21,14 @@
 
 <script>
 import { boardSize, directions } from "../data.js";
+import LateralMenuComponent from "../components/LateralMenusComponent.vue";
 
 export default {
   name: "SnakeGameComponent",
+
+  components: {
+    LateralMenuComponent,
+  },
 
   props: {
     snakeSpeed: String,

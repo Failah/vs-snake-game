@@ -59,8 +59,8 @@ export default {
   top: 0;
   height: 100%;
   width: 100%;
-  z-index: 100;
-  display: flex;
+  z-index: 200;
+  display: none;
   flex-direction: column;
   row-gap: 120px;
   justify-content: center;
