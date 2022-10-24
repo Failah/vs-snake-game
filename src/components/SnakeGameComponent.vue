@@ -6,7 +6,7 @@
         'url(' + require('../assets/' + backgroundMain + '') + ')',
     }"
   >
-    <SideMenuComponent />
+    <SideMenuComponent @speed="setSpeed" />
     <div id="game-container">
       <div id="score-counter">
         <h3>Score:</h3>
@@ -37,7 +37,7 @@ export default {
   },
 
   props: {
-    snakeSpeed: String,
+    // snakeSpeed: string,
   },
 
   data() {
@@ -52,12 +52,14 @@ export default {
       score: 0,
       ghostCounter: 0,
       backgroundMain: "neoncity1.gif",
+      snakeSpeed: "400",
     };
   },
 
   // watches for speed (props) changes and updates the game if any
   // in this case said "change" occurs when user changes snake's speed via the html select element
-  watch: {
+  // this is a watcher, was used when speed selector was in header component: it looks for the prop snakeSpeed to change (via emit and props) to compute the conteined code and adjust the snake speed
+  /*watch: {
     snakeSpeed: {
       immediate: true,
       handler(val, oldVal) {
@@ -70,7 +72,7 @@ export default {
         }
       },
     },
-  },
+  }, */
 
   mounted() {
     // generate 2d context (the ref is specified in canvas attribute ref="snakegame")
@@ -182,6 +184,17 @@ export default {
     moveSpeed() {
       clearInterval(this.interval);
       this.interval = setInterval(this.moveNext, this.snakeSpeed);
+    },
+
+    setSpeed(selectedSpeed) {
+      this.snakeSpeed = selectedSpeed;
+      console.log("selected speed is:", selectedSpeed);
+      console.log("speed is:", this.speed);
+      this.pauseIndex = true; // this is needed otherwise different intervals will alternate on pause trigger if you start a new game while beeing in pause mode (generating not pause but alternate speed movement)
+      this.resetGame();
+      clearInterval(this.ghostInterval);
+      (this.ghostCounter = 0), this.moveSpeed();
+      console.log("snakeSpeed:", this.snakeSpeed);
     },
 
     moveNext() {
