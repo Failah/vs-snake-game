@@ -94,6 +94,7 @@ export default {
       top: -5px;
       user-select: none;
       cursor: pointer;
+      animation: glowing 1300ms infinite;
 
       &.left-button {
         width: 162px;
@@ -143,6 +144,21 @@ export default {
   }
   100% {
     left: 0px;
+  }
+}
+
+@keyframes glowing {
+  0% {
+    background-color: black;
+    box-shadow: 0 0 4px #ff005b;
+  }
+  50% {
+    background-color: black;
+    box-shadow: 0 0 15px #ff005b;
+  }
+  100% {
+    background-color: black;
+    box-shadow: 0 0 4px #ff005b;
   }
 }
 </style>
