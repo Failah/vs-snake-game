@@ -56,7 +56,7 @@ export default {
       score: 0,
       ghostCounter: 0,
       backgroundMain: "neoncity1.gif",
-      snakeSpeed: "400",
+      snakeSpeed: "50",
       hideGame: false,
     };
   },
@@ -387,8 +387,10 @@ export default {
 
     hideGameScreen(value) {
       if (value === "no") {
+        window.addEventListener("keydown", this.onArrowKeyboardPressed);
         this.hideGame = false;
       } else {
+        window.removeEventListener("keydown", this.onArrowKeyboardPressed);
         this.hideGame = true;
       }
     },

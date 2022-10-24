@@ -5,7 +5,7 @@
       :class="toggleLeft === true ? 'left-menu-active' : 'left-hide'"
     >
       <div id="speed-select">
-        <h3>Snake speed:</h3>
+        <h3>Snake Speed:</h3>
         <select
           class="decorated"
           @change="$emit('speed', speedValue), removeBlur()"
@@ -76,7 +76,7 @@ export default {
     return {
       toggleLeft: false,
       toggleRight: false,
-      speedValue: "400",
+      speedValue: "50",
       bgImage: "neoncity1.gif",
       hideGame: "no",
     };

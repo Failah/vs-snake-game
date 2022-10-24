@@ -1,21 +1,7 @@
 <template>
-  <div id="game-options-container">
+  <div id="header-container">
     <div id="speed-select">
-      <h3>Select Snake's speed:</h3>
-      <select
-        class="decorated"
-        @change="$emit('speed', speedValue), removeBlur()"
-        v-model="speedValue"
-        name="speed"
-        id="speed"
-      >
-        <option value="400">Very Slow</option>
-        <option value="300">Slow</option>
-        <option value="200">Normal</option>
-        <option value="100">Fast</option>
-        <option value="50">Very Fast</option>
-        <option value="20">Impossible</option>
-      </select>
+      <h3>Failah</h3>
     </div>
     <div id="score-counter">
       <h3>Total Points:</h3>
@@ -48,7 +34,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#game-options-container {
+#header-container {
   background-color: black;
   color: #ff005b;
   height: 120px;
@@ -57,23 +43,6 @@ export default {
   align-items: center;
   justify-content: space-around;
   border: #fffd01 5px solid;
-
-  #speed-select {
-    display: flex;
-    align-items: center;
-    column-gap: 10px;
-  }
-
-  #speed {
-    background-color: black;
-    color: #ff005b;
-    border: #ff005b 1px solid;
-    padding: 5px;
-
-    option {
-      background-color: black;
-    }
-  }
 
   #score-counter {
     display: flex;
