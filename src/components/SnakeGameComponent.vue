@@ -6,8 +6,12 @@
         'url(' + require('../assets/' + backgroundMain + '') + ')',
     }"
   >
-    <SideMenuComponent @speed="setSpeed" />
-    <div id="game-container">
+    <SideMenuComponent
+      @speed="setSpeed"
+      @bg-image="setBackgroundImage"
+      @hide-game="hideGameScreen"
+    />
+    <div id="game-container" v-show="hideGame === false">
       <div id="score-counter">
         <h3>Score:</h3>
         <div>{{ score }}</div>
@@ -53,6 +57,7 @@ export default {
       ghostCounter: 0,
       backgroundMain: "neoncity1.gif",
       snakeSpeed: "400",
+      hideGame: false,
     };
   },
 
@@ -373,6 +378,19 @@ export default {
       let inc = this.getMultiplier(this.snakeSpeed);
       this.score += inc;
       console.log("Current Score:", this.score);
+    },
+
+    // -------------------------------------------------------------------- LEFT OPTIONS MENU
+    setBackgroundImage(image) {
+      this.backgroundMain = image;
+    },
+
+    hideGameScreen(value) {
+      if (value === "no") {
+        this.hideGame = false;
+      } else {
+        this.hideGame = true;
+      }
     },
   },
 };

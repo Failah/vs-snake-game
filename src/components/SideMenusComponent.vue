@@ -21,6 +21,38 @@
           <option value="20">Impossible</option>
         </select>
       </div>
+      <div id="bg-select">
+        <h3>Background:</h3>
+        <select
+          class="decorated"
+          @change="$emit('bg-image', bgImage), removeBlur()"
+          v-model="bgImage"
+          name="bgImage"
+          id="bg-images"
+        >
+          <option value="neoncity1.gif">Neon City</option>
+          <option value="neoncity2.gif">Space Bridge</option>
+          <option value="neoncity3.gif">Rainy Day</option>
+          <option value="neoncity4.gif">Gamer Room</option>
+          <option value="neoncity5.gif">Bird City</option>
+          <option value="neoncity6.gif">Future Sky</option>
+          <option value="neoncity7.gif">Hacking Hub</option>
+          <option value="blackbg.jpg">Total Black</option>
+        </select>
+      </div>
+      <div id="hide-game-select">
+        <h3>Hide Game:</h3>
+        <select
+          class="decorated"
+          @change="$emit('hide-game', hideGame), removeBlur()"
+          v-model="hideGame"
+          name="hideGame"
+          id="hide-game"
+        >
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+        </select>
+      </div>
       <div @click="toggleLeftMenu" class="toggle-button left-button">
         OPTIONS
       </div>
@@ -45,6 +77,8 @@ export default {
       toggleLeft: false,
       toggleRight: false,
       speedValue: "400",
+      bgImage: "neoncity1.gif",
+      hideGame: "no",
     };
   },
 
@@ -134,15 +168,20 @@ export default {
     }
   }
 
-  #speed-select {
+  #speed-select,
+  #bg-select,
+  #hide-game-select {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     column-gap: 10px;
     font-size: 0.8rem;
+    padding-top: 10px;
   }
 
-  #speed {
+  #speed,
+  #bg-images,
+  #hide-game {
     background-color: black;
     color: #ff005b;
     border: #ff005b 1px solid;
