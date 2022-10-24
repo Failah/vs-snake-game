@@ -1,5 +1,11 @@
 <template>
-  <div id="snake-container">
+  <div
+    id="snake-container"
+    :style="{
+      'background-image':
+        'url(' + require('../assets/' + backgroundMain + '') + ')',
+    }"
+  >
     <SideMenuComponent />
     <div id="game-container">
       <div id="score-counter">
@@ -45,6 +51,7 @@ export default {
       pauseIndex: true,
       score: 0,
       ghostCounter: 0,
+      backgroundMain: "neoncity1.gif",
     };
   },
 
@@ -362,11 +369,10 @@ export default {
 #snake-container {
   position: relative;
   margin: 0 auto;
-  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(../assets/neoncity1.gif);
+  // background-image: url(../assets/neoncity1.gif);
   background-size: cover;
   background-position-y: 40%;
   border: 5px solid #01c4ff;
