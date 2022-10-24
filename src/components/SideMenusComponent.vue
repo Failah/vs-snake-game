@@ -4,7 +4,23 @@
       class="menu"
       :class="toggleLeft === true ? 'left-menu-active' : 'left-hide'"
     >
-      MENU SX
+      <div id="speed-select">
+        <h3>Snake speed:</h3>
+        <select
+          class="decorated"
+          @change="$emit('speed', speedValue), removeBlur()"
+          v-model="speedValue"
+          name="speed"
+          id="speed"
+        >
+          <option value="400">Very Slow</option>
+          <option value="300">Slow</option>
+          <option value="200">Normal</option>
+          <option value="100">Fast</option>
+          <option value="50">Very Fast</option>
+          <option value="20">Impossible</option>
+        </select>
+      </div>
       <div @click="toggleLeftMenu" class="toggle-button left-button">
         OPTIONS
       </div>
@@ -13,7 +29,6 @@
       class="menu"
       :class="toggleRight === true ? 'right-menu-active' : 'right-hide'"
     >
-      MENU DX
       <div @click="toggleRightMenu" class="toggle-button right-button">
         BOOSTS
       </div>
@@ -29,6 +44,7 @@ export default {
     return {
       toggleLeft: false,
       toggleRight: false,
+      speedValue: "400",
     };
   },
 
@@ -39,6 +55,11 @@ export default {
 
     toggleRightMenu() {
       this.toggleRight = !this.toggleRight;
+    },
+
+    removeBlur() {
+      console.log("remove blur");
+      document.activeElement.blur();
     },
   },
 };
@@ -53,8 +74,15 @@ export default {
   width: 100%;
   color: #ff005b;
 
+  // left menu + relative button styling
   > div:first-child {
     left: -351px;
+    padding: 20px;
+  }
+
+  // right menu + relative button styling
+  > div:nth-child(2) {
+    left: 351px;
   }
 
   .left-hide {
@@ -63,10 +91,6 @@ export default {
 
   .right-hide {
     animation: RightHide 0.3s ease forwards;
-  }
-
-  > div:nth-child(2) {
-    left: 351px;
   }
 
   .menu {
@@ -107,6 +131,25 @@ export default {
         text-align: center;
         left: -172px;
       }
+    }
+  }
+
+  #speed-select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    font-size: 0.8rem;
+  }
+
+  #speed {
+    background-color: black;
+    color: #ff005b;
+    border: #ff005b 1px solid;
+    padding: 5px;
+
+    option {
+      background-color: black;
     }
   }
 }
