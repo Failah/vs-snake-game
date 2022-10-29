@@ -62,7 +62,7 @@ export default {
   z-index: 200;
   display: flex;
   flex-direction: column;
-  row-gap: 120px;
+  row-gap: 10%;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -95,7 +95,6 @@ button {
   position: relative;
   display: inline-block;
   padding: 25px 30px;
-  margin: 40px 0;
   color: #03e9f4;
   background-color: black;
   text-decoration: none;
