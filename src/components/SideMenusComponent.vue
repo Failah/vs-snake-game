@@ -103,6 +103,7 @@ export default {
 #side-menus-container {
   position: absolute;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -112,11 +113,13 @@ export default {
   > div:first-child {
     left: -351px;
     padding: 20px;
+    flex-wrap: wrap;
   }
 
   // right menu + relative button styling
   > div:nth-child(2) {
     left: 351px;
+    flex-wrap: wrap;
   }
 
   .left-hide {
