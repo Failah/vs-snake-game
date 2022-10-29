@@ -50,6 +50,7 @@ export default {
       directions: directions,
       snake: [{ x: 0, y: 0 }],
       snakeNewDirection: null,
+      snakeColor: "#01c4ff",
       nextFoodPosition: { x: 0, y: 0 },
       nextGhostPosition: { x: 0, y: 0 },
       pauseIndex: true,
@@ -139,7 +140,7 @@ export default {
           // (this.context.lineWidth = 5),
           // this.context.stroke()
         );
-        this.context.fillStyle = "#01c4ff";
+        this.context.fillStyle = this.snakeColor;
         this.context.fill();
       });
       this.context.closePath();

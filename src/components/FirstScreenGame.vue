@@ -57,7 +57,7 @@ export default {
   position: absolute;
   left: 0;
   top: 0;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   z-index: 200;
   display: flex;
@@ -91,6 +91,7 @@ export default {
 
 // button skinning and animation
 button {
+  min-height: 98px;
   position: relative;
   display: inline-block;
   padding: 25px 30px;
