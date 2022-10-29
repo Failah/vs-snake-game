@@ -139,6 +139,10 @@ export default {
     position: relative;
     left: 0;
 
+    div {
+      flex-wrap: wrap;
+    }
+
     &.left-menu-active {
       animation: LeftShow 0.3s ease forwards;
     }
